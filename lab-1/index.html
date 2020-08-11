@@ -50,6 +50,9 @@
 			<h1>จำนวนแถว</h1>
 			<input type="number" v-model="row">
 			<h3> สูตรคูณแม่ก่อนหน้า {{numck}} </h3>
+			<h2>
+				sum = {{sum_n(row)}}
+			</h2>
 		</div>
 		
 		<div class="col-sm-6">
@@ -73,11 +76,18 @@
 			data: {
 				num: 2,
 				numck: 2,
-				row: 12
+				row: 12,
 			},
 			methods:{
 				x: function(i){
 					return  this.num*i
+				},
+				sum_n: function(row){
+					ck = 0
+					for (i = 0; i <= row; i++) {	
+						ck += this.num*i}
+						
+					return ck
 				}
 
 			},
@@ -91,6 +101,7 @@
 				rowck: function(){
 					return parseInt(this.row)
 				}
+				
 			}
 
 		})
