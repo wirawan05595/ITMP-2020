@@ -1,23 +1,70 @@
-
 <!DOCTYPE html>
 <html>
 <head>
 	<title>Lab - Multimedia Programming 2563 ITKMITL</title>
 	<link rel=stylesheet href="../src/reset.css">
-	<link rel=stylesheet href="lab.css">
+	<link rel='stylesheet' type='text/css' href='stylesheet.css'>
+
+	<link href="https://fonts.googleapis.com/css?family=Itim&display=swap" rel="stylesheet">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<style>
+		body {
+			font-family: 'Itim', cursive;
+			background-color: #3c2946;
+    		margin: 0;
+    		top: 10vh; 
+    		font-size: 20px;
+    		animation-name: iceice;
+    		animation-delay:1s;
+			animation: iceice 2s;
+			text-align: center;
+			display: inline-block;
+		}
+		#ice1{
+			background-color: #56556e;
+		position: absolute;
+		left:25%;
+		right: 25%;
+		top: 15vh; 
+    	display: block;
+    	border-radius: 25px;
+		z-index: 1000;
+    	animation-name: iceice;
+    	color: #ffd571;
+		text-shadow: 2px 1px 5px #bbd196;
+
+		}
+
+</style>
 </head>
 <body class="paper">
-	<div id="app">
-		<input type="number" v-model="num">
-		<input type="number" v-model="row">
-		<h3> สูตรคูณแม่ {{num}} </h3>
-		<h3> สูตรคูณแม่ก่อนหน้า {{numck}} </h3>
-		<div class="space"></div>
-		<h4 v-for="i in rowck">
-			{{num}} x {{i}} = {{x(i)}}
-		</h4>
+<table width=100%>
+<div class="container-fluid" id="ice1">
+	<div id="app" class="row">
+		<div class="col-sm-6" >
+			<h1>ตัวคูณ</h1>
+			<input type="number" v-model="num" >
+			<h1>จำนวนแถว</h1>
+			<input type="number" v-model="row">
+			<h3> สูตรคูณแม่ก่อนหน้า {{numck}} </h3>
+		</div>
+		
+		<div class="col-sm-6">
+			<h3> สูตรคูณแม่ {{num}} </h3>
+			
+			<div class="space"></div>
+			<h4 v-for="i in rowck">
+				{{num}} x {{i}} = {{x(i)}}
+			</h4>
+	    </div>
+	  </div>
 	</div>
+	</table>
+
+
 
 	<script>
 		
