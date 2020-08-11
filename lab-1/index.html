@@ -8,28 +8,43 @@
 </head>
 <body class="paper">
 	<div id="app">
-		<input type="number">
+		<input type="number" v-model="num">
+		<input type="number" v-model="row">
+		<h3> สูตรคูณแม่ {{num}} </h3>
+		<h3> สูตรคูณแม่ก่อนหน้า {{numck}} </h3>
 		<div class="space"></div>
-		<h4>{{number}} x 1 = x</h4>
-		<h4>{{number}} x 2 = x</h4>
-		<h4>{{number}} x 3 = x</h4>
-		<h4>{{number}} x 4 = x</h4>
-		<h4>{{number}} x 5 = x</h4>
-		<h4>{{number}} x 6 = x</h4>
-		<h4>{{number}} x 7 = x</h4>
-		<h4>{{number}} x 8 = x</h4>
-		<h4>{{number}} x 9 = x</h4>
-		<h4>{{number}} x 10 = x</h4>
-		<h4>{{number}} x 11 = x</h4>
-		<h4>{{number}} x 12 = x</h4>
+		<h4 v-for="i in rowck">
+			{{num}} x {{i}} = {{x(i)}}
+		</h4>
 	</div>
 
 	<script>
+		
 		let app = new Vue({
 			el: '#app',
 			data: {
-				number: 2
+				num: 2,
+				numck: 2,
+				row: 12
+			},
+			methods:{
+				x: function(i){
+					return  this.num*i
+				}
+
+			},
+			watch: {
+				num: function(a,b){
+					this.numck = b
+
+				}
+			},
+			computed: {
+				rowck: function(){
+					return parseInt(this.row)
+				}
 			}
+
 		})
 	</script>
 </body>
