@@ -7,30 +7,65 @@
 	<link rel="stylesheet" type="text/css" href="lab.css">
 </head>
 <body>
-	<div id="app">
-		
+    <div id="app">
+		About
+		<h3>Username : {{person.username}}</h3>
+		<h3>Name : {{person.name}}</h3>
+		<h3>Email : {{person.email}}</h3>
+		<h3>Website : {{person.website}}</h3>
+		<h3>Company : {{person.company.name}}</h3>
+		Users
+		<h2 v-for="u in users" :data-id="u.id" @click="viewBio(u)">{{u.username}}</h2>
 	</div>
 	
 
 	<script>
 		fetch('https://jsonplaceholder.typicode.com/users')
 		.then(response => response.json())
-		.then(json => {console.log(json)})
+		.then(json => {console.log(json)
+            app.users = json
+			app.person = json[0]
+        })
 		let app = new Vue({
 			el: '#app',
-			data: {
-				users :[],
-				person:{
-					id:0,
-					name:'..loading',
-					username:'..loading',
-					email:'..loading',
-					website:'..loading',
-					company:{
-						name : '..loading',
+			methods:{
+				viewBio: function (user) {
+					this.person = user
+				}
+			},
+                data: {
+				person :{
+					"id": 1,
+					"name": "____",
+					"username": "____",
+					"email": "_____",
+
+					"website": "_______",
+					"company": {
+						"name": "_______",
+						"catchPhrase": "Multi-layered client-server neural-net",
+						"bs": "harness real-time e-markets"
 					}
+				},
+				users:[
+				{
+					"id": 1,
+					"name": "_______",
+					"username": "_______",
+					"email": "_______",
+
+					"website": "_______",
+					"company": {
+						"name": "_______",
+						"catchPhrase": "Multi-layered client-server neural-net",
+						"bs": "harness real-time e-markets"
+					}
+				}
+					]
+					
 				}	
-			}
+				
+			
 		})
 
 	</script>
