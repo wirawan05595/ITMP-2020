@@ -55,7 +55,6 @@ a-dot{
 	border-radius: 100%;
 	cursor: pointer;
 }
-
 a-dot[data-pick="true"]{
 	background-color: hsl(var(--h),100%,var(--picklight));
 }
