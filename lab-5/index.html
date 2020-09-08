@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Lab - Multimedia Programming 2563 ITKMITL</title>
+	<link rel="stylesheet" type="text/css" href="../src/reset.css">
+	<link rel="stylesheet" type="text/css" href="lab.css">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+</head>
+<body>
+	<div id="canvas">
+		<section id="canvas_header">
+			<div>
+				คุณแยกผลไม้ได้แล้ว {{score}} ชิ้น
+			</div>
+		</section>
+		<section id="canvas_main" 
+		:data-play="play">
+			<main>
+				<div class="box _path" 
+				v-for="i in 14" 
+				:data-pst="i"></div>
+				<div class="box _toggle" data-pst="10" :data-isrightarrow="isRightArrow"></div>
+
+				<div class="box _fruit" v-for="fu in fruits" 
+				:data-pst="fu.pst"  :data-type="fu.type"
+				></div>
+
+				<div class="box _origin"></div>
+				<div class="box _12" data-pst="12"></div>
+				<div class="box _16" data-pst="16"></div>
+				
+			</main>
+		</section>
+		<section id="canvas_footer">
+			<div v-if="play" class="btn" id="toggle" @click="change()">
+				สับราง
+			</div>
+			<div v-if="!play" class="btn" id="endgame" onClick="javascript:location.reload();">
+				เริ่มเกมใหม่
+			</div>
+		</section>
+	</div>
+
+	<script>
+		function rand(start,stop){
+			let shift = (stop-start)+1
+			return Math.floor(Math.random()*100%shift)+start
+		}
+		
+		let fruitCount = 3
+		let isRightArrow = 1
+		let speed = 1000
+		let app = new Vue({
+			el:'#canvas',
+			data:{
+				isRightArrow: isRightArrow,
+				play:true,
+				time:0,
+				score:0,
+				fruits:[
+					{id:1,type:13,pst:6,run:true,step:1},
+					{id:2,type:11,pst:3,run:true,step:1},
+				]
+			},
+			methods:{
+				change: function(){
+					if(this.isRightArrow == 1){
+						this.isRightArrow = 0
+					}else{
+						this.isRightArrow = 1
+					}
+					console.log(this.isRightArrow)
+				},
+			},
+			computed:{
+			},
+			watch:{
+				time: function(x){
+					for(let i in this.fruits){
+					// เคลื่อนที่
+						let run = this.fruits[i].run
+						if(run && this.fruits[i].pst != 12 && this.fruits[i].pst != 16 && this.play){
+							this.fruits[i].pst = this.fruits[i].pst+this.fruits[i].step
+
+						}
+						// หยุด
+						if(this.fruits[i].pst == 12 && this.fruits[i].pst == 16){
+						   this.fruits[i].run = false
+						}
+						// เปลี่ยนทางเดิน
+						if (this.fruits[i].pst == 10) {
+							if (this.isRightArrow == 1) {
+								this.fruits[i].step = 3
+							}else{
+								this.fruits[i].step = 1
+							}
+						}else{	
+						}
+						if(this.fruits[i].pst == 11 || this.fruits[i].pst == 13){
+							//ถ้าถูก
+							if (this.fruits[i].pst == this.fruits[i].type && this.fruits[i].run) {
+								this.score++;
+							}
+
+							//ถ้าผิด
+							else if(this.fruits[i].pst != this.fruits[i].type && this.fruits[i].run){
+								this.play = false;
+								return this.fruits[i].run = false
+								
+							}
+						}
+
+						
+						
+						
+						
+					}
+					//สร้างใหม่
+					let spawn = rand(0,1)
+					if(spawn == 1  && this.play){
+						fruitCount = rand(0,1)
+						if(fruitCount == 1){
+							this.fruits.push({id:fruitCount,type:11,pst:1,run:true,step:1})
+						}else{
+							this.fruits.push({id:fruitCount,type:13,pst:1,run:true,step:1})
+						}
+						fruitCount++;
+					}
+
+				}
+			}
+		})
+
+		let playing = setInterval(function(){
+			if (app.play) {
+			app.time++
+			this.speed ++
+
+			
+			}
+		},speed)
+	</script>
+</body>
+</html>
