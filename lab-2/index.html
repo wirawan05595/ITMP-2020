@@ -5,14 +5,16 @@
 
 	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
 	<link rel="stylesheet" type="text/css" href="lab.css">
+	<link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="app">
+    <div id="app" class="gradient-border">
 		<TABLE style="width: 100%; height: 100%;"> 
 			<tr>
-				<th style="float: left;">
+				<th style="position: relative; float: left;">
 	
-		<h1>Users</h1>
+		<h1 style="color: #F8C060;">Users</h1>
 		<h2  v-for="u in users" :data-id="u.id" @click="viewBio(u)">{{u.username}}
 			<br>
 		<img  :src="`https://picsum.photos/id/4${u.id}/300/300`" >
@@ -20,15 +22,16 @@
 	</h2>
 		
 	</th>
-     <th style="position: absolute; top: 2%; margin: 0; right: 20%;">
-	<h1>About</h1>
+     <th style="position: absolute; top: 2%; margin: 0; "  class="about" >
+	<h1 style="color: #F8C060; ">About</h1>
 		<h3>Username : {{person.username}}</h3>
 		<h3>Name : {{person.name}}</h3>
 		<h3>Email : {{person.email}}</h3>
 		<h3>Website : {{person.website}}</h3>
 		<h3>Company : {{person.company.name}}</h3>
-		<button @click="getA"> เค้ามีสิทธิที่จะได้ A ไหม </button>
+		<button @click="getA" class="BB"> เค้ามีสิทธิที่จะได้ A ไหม </button>
 		<h1>{{yesno.answer}}</h1>
+		<img :src="yesno.image" alt="">
 		
      </th>
 	</tr>
@@ -62,7 +65,7 @@
 			},
                 data: {
 				yesno:{"answer":" ",
-				"forced":false,"image":"https://yesno.wtf/assets/yes/15-3d723ea13af91839a671d4791fc53dcc.gif"},
+				"forced":false,"image":""},
 				person :{
 					"id": 1,
 					"name": "____",
