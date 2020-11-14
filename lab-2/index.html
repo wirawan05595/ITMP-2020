@@ -8,14 +8,32 @@
 </head>
 <body>
     <div id="app">
-		About
+		<TABLE style="width: 100%; height: 100%;"> 
+			<tr>
+				<th style="float: left;">
+	
+		<h1>Users</h1>
+		<h2  v-for="u in users" :data-id="u.id" @click="viewBio(u)">{{u.username}}
+			<br>
+		<img  :src="`https://picsum.photos/id/4${u.id}/300/300`" >
+		
+	</h2>
+		
+	</th>
+     <th style="position: absolute; top: 2%; margin: 0; right: 20%;">
+	<h1>About</h1>
 		<h3>Username : {{person.username}}</h3>
 		<h3>Name : {{person.name}}</h3>
 		<h3>Email : {{person.email}}</h3>
 		<h3>Website : {{person.website}}</h3>
 		<h3>Company : {{person.company.name}}</h3>
-		Users
-		<h2 v-for="u in users" :data-id="u.id" @click="viewBio(u)">{{u.username}}</h2>
+		<button @click="getA"> เค้ามีสิทธิที่จะได้ A ไหม </button>
+		<h1>{{yesno.answer}}</h1>
+		
+     </th>
+	</tr>
+
+	</TABLE> 
 	</div>
 	
 
@@ -31,9 +49,20 @@
 			methods:{
 				viewBio: function (user) {
 					this.person = user
+				},
+				getA:function (){
+					fetch('https://yesno.wtf/api')
+		            .then(response => response.json())
+		           .then(json => {console.log(json)
+					app.yesno = json
+			         
+        })
+
 				}
 			},
                 data: {
+				yesno:{"answer":" ",
+				"forced":false,"image":"https://yesno.wtf/assets/yes/15-3d723ea13af91839a671d4791fc53dcc.gif"},
 				person :{
 					"id": 1,
 					"name": "____",
